@@ -35,6 +35,39 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 /**
  * @swagger
+ * /api/get_telesale_statistic:
+ *   get:
+ *     summary: Protected route
+ *     description: Returns a protected message if a valid JWT token is provided.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 room:
+ *                   type: number
+ *     responses:
+ *       200:
+ *         description: Returns a protected message
+ *       401:
+ *         description: Unauthorized
+ *       403:
+ *         description: Forbidden
+ */
+app.get('/api/get_telesale_statistic', (req, res) => {
+  var room = req.body.room;
+  db.query('SELECT * FROM telesale_statistic_api WHERE room = ?', [room], (err, results) => {
+    if (err) {
+      return res.status(500).json({ error: err.message });
+    }
+    return res.json({results : results});
+  });
+});
+
+/**
+ * @swagger
  * /api/post_telesale_statistic:
  *   post:
  *     summary:
@@ -72,7 +105,6 @@ app.post('/api/post_telesale_statistic', (req, res) => {
   var care = req.body.care;
   db.query('SELECT * FROM telesale_statistic_api WHERE telesale = ? AND work_shift = ?', [telesale, work_shift], (err, results) => {
     if (err) {
-      console.log(err.message);
       return res.status(500).json({ error: err.message });
     }
 
