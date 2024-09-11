@@ -40,7 +40,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
  *     summary: Protected route
  *     description: Returns a protected message if a valid JWT token is provided.
  *     parameters:
- *       - room: room
+ *       - name: room
  *         in: query
  *         description: 3
  *         required: true
