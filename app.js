@@ -65,11 +65,11 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
  *         description: Forbidden
  */
 app.post('/api/post_telesale_statistic', (req, res) => {
-  var telesale = req.telesale;
-  var sale = req.sale;
-  var room = req.room;
-  var work_shift = req.work_shift;
-  var care = req.care;
+  var telesale = req.body.telesale;
+  var sale = req.body.sale;
+  var room = req.body.room;
+  var work_shift = req.body.work_shift;
+  var care = req.body.care;
   console.log(telesale);
   console.log(sale);
   console.log(room);
