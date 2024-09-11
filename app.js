@@ -70,13 +70,11 @@ app.post('/api/post_telesale_statistic', (req, res) => {
   var room = req.body.room;
   var work_shift = req.body.work_shift;
   var care = req.body.care;
-  console.log(telesale);
-  console.log(sale);
-  console.log(room);
-  console.log(work_shift);
-  console.log(care);
   db.query('SELECT * FROM telesale_statistic_api WHERE telesale = ?, work_shift = ?', [telesale, work_shift], (err, results) => {
-    if (err) return res.status(500).json({ error: err.message });
+    if (err) {
+      console.log(err.message);
+      return res.status(500).json({ error: err.message });
+    }
 
     if (results.length === 1) {
       var result = results[0];
