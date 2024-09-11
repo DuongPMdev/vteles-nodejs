@@ -56,7 +56,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
  */
 app.get('/api/get_telesale_statistic', (req, res) => {
   const { room } = req.query;
-  db.query('SELECT * FROM telesale_statistic_api WHERE room = ?', [room], (err, results) => {
+  db.query('SELECT telesale_statistic_api.*, account.account_id, account.display_name FROM vteles.telesale_statistic_api INNER JOIN vteles.account ON telesale_statistic_api.telesale = account.account_id WHERE telesale_statistic_api.room = ?', [room], (err, results) => {
     if (err) {
       return res.status(500).json({ error: err.message });
     }
