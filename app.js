@@ -51,11 +51,11 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
  *                 sale:
  *                   type: string
  *                 room:
- *                   type: int
+ *                   type: number
  *                 work_shift:
- *                   type: int
+ *                   type: number
  *                 care:
- *                   type: int
+ *                   type: number
  *     responses:
  *       200:
  *         description:
@@ -86,7 +86,7 @@ app.post('/api/post_telesale_statistic', (req, res) => {
     }
     else {
       var number_care = care > 0 ? 1 : 0;
-      db.query('INSERT INTO telesale_statistic_api(telesale, sale, room, work_shift, number_care) VALUE (?, ?, ?, ?, ?)', [telesale, sale, room, work_shift, 1, number_care], (err, results) => {
+      db.query('INSERT INTO telesale_statistic_api(telesale, sale, room, work_shift, number_call, number_care) VALUE (?, ?, ?, ?, ?, ?)', [telesale, sale, room, work_shift, 1, number_care], (err, results) => {
         if (err) return res.status(500).json({ error: err.message });
         res.json({});
       });
