@@ -57,7 +57,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
  *         description: Forbidden
  */
 app.get('/api/get_telesale_statistic', (req, res) => {
-  var room = req.body.room;
+  const { room } = req.query;
   db.query('SELECT * FROM telesale_statistic_api WHERE room = ?', [room], (err, results) => {
     if (err) {
       return res.status(500).json({ error: err.message });
