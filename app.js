@@ -46,12 +46,16 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
  *             schema:
  *               type: object
  *               properties:
- *                 stage:
+ *                 telesale:
+ *                   type: string
+ *                 sale:
+ *                   type: string
+ *                 room:
  *                   type: int
- *                   example: 0
- *                 end_game:
- *                   type: boolean
- *                   example: false
+ *                 work_shift:
+ *                   type: int
+ *                 care:
+ *                   type: int
  *     responses:
  *       200:
  *         description:
