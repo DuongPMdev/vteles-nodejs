@@ -59,6 +59,9 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
  *         description: Forbidden
  */
 app.get('/api/get_telesale_statistic', (req, res) => {
+  if (db.state === 'disconnected') {
+    db.connect();
+  }
   const { room } = req.query;
   db.query('SELECT telesale_statistic_api.*, account.account_id, account.display_name FROM vteles.telesale_statistic_api INNER JOIN vteles.account ON telesale_statistic_api.telesale = account.account_id WHERE telesale_statistic_api.room = ?', [room], (err, results) => {
     if (err) {
@@ -100,6 +103,9 @@ app.get('/api/get_telesale_statistic', (req, res) => {
  *         description: Forbidden
  */
 app.post('/api/post_telesale_statistic', (req, res) => {
+  if (db.state === 'disconnected') {
+    db.connect();
+  }
   var telesale = req.body.telesale;
   var sale = req.body.sale;
   var room = req.body.room;
