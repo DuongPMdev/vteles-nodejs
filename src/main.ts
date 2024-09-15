@@ -4,6 +4,10 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  
+  app.enableCors({
+    origin: 'http://34.16.53.3', // Allow requests from this origin
+  });
 
   const config = new DocumentBuilder()
   .setTitle('NestJS API')
