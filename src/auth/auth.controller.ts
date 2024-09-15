@@ -1,4 +1,4 @@
-import { Controller, Post, Get, Body, Request, UseGuards, Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
+import { Controller, Post, Get, Body, Query, Request, UseGuards, Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { GetTelesaleStatisticDTO } from './dto/get_telesale_statistic.dto';
 import { PostTelesaleStatisticDTO } from './dto/post_telesale_statistic.dto';
@@ -15,8 +15,7 @@ export class AuthController {
   @ApiOperation({ summary: 'Get telesales statistic' })
   @ApiResponse({ status: 200, description: 'Successful Get telesales statistic'})
   @ApiResponse({ status: 401, description: 'Unauthorized' })
-  async getTelesaleStatistic(@Request() req, @Body() getTelesaleStatisticDTO: GetTelesaleStatisticDTO) {
-    const room = getTelesaleStatisticDTO.room;
+  async getTelesaleStatistic(@Request() req, @Query('room') room: number) {
     const results = await this.authService.getTelesaleStatistic(room);
     return { "message": "", "results": results };
   }
