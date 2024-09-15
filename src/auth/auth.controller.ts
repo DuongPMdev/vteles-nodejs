@@ -16,7 +16,7 @@ export class AuthController {
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   async getTelesaleStatistic(@Request() req, @Body() getTelesaleStatisticDTO: GetTelesaleStatisticDTO) {
     const room = getTelesaleStatisticDTO.room;
-    const results = this.authService.getTelesaleStatistic(room);
+    const results = await this.authService.getTelesaleStatistic(room);
     return { "message": "", "results": results };
   }
 }
