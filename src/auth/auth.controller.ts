@@ -6,7 +6,7 @@ import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 
 
 @Injectable()
-@ApiTags('account')
+@ApiTags('api')
 @Controller('account')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
@@ -16,7 +16,7 @@ export class AuthController {
   @ApiOperation({ summary: 'Get telesales statistic' })
   @ApiResponse({ status: 200, description: 'Successful Get telesales statistic'})
   @ApiResponse({ status: 401, description: 'Unauthorized' })
-  async getTelesaleStatistic(@Body() getTelesaleStatisticDTO: GetTelesaleStatisticDTO) {
+  async getTelesaleStatistic(@Request() req, @Body() getTelesaleStatisticDTO: GetTelesaleStatisticDTO) {
     const room = getTelesaleStatisticDTO.room;
     const results = this.authService.getTelesaleStatistic(room);
     return { "message": "", "results": results };
