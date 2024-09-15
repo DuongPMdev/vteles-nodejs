@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 export class GetTelesaleStatisticDTO {
-  @ApiProperty({ example: '', description: 'Vhomes room' })
+  @ApiProperty({ example: 12, description: 'Vhomes room' })
   room: number;
 }
