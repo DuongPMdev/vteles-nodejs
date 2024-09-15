@@ -6,7 +6,7 @@ import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 
 @Injectable()
 @ApiTags('api')
-@Controller('account')
+@Controller('api')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
   
