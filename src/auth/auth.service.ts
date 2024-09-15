@@ -13,7 +13,7 @@ export class AuthService {
   
   async getTelesaleStatistic(room: number) {
     const telesaleStatisticAPIs = await this.telesaleStatisticAPIRepository.find({ where: { room: room } });
-    return classToPlain(telesaleStatisticAPIs);
+    return telesaleStatisticAPIs;
   }
 
 }
