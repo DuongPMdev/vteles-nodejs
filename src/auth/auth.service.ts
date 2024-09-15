@@ -1,11 +1,14 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { Account } from './entity/account.entity';
 import { TelesaleStatisticAPI } from './entity/telesale_statistic_api.entity';
 
 @Injectable()
 export class AuthService {
   constructor(
+    @InjectRepository(Account)
+    private accountRepository: Repository<Account>,
     @InjectRepository(TelesaleStatisticAPI)
     private telesaleStatisticAPIRepository: Repository<TelesaleStatisticAPI>,
   ) {}
@@ -14,7 +17,8 @@ export class AuthService {
     const telesaleStatisticAPIs = await this.telesaleStatisticAPIRepository.find({ where: { room: room } });
     
     for (const telesaleStatisticAPI of telesaleStatisticAPIs) {
-      telesaleStatisticAPI["display_name"] = "Pham Minh Duong";
+      const account = await this.accountRepository.findOne({ where: { account_id: telesaleStatisticAPI.telesale } });
+      telesaleStatisticAPI["display_name"] = account.display_name;
     }
     return telesaleStatisticAPIs;
   }

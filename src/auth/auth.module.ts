@@ -7,11 +7,12 @@ import { JwtAuthGuard } from './jwt-auth.guard';
 import { AuthController } from './auth.controller';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Account } from './entity/account.entity';
 import { TelesaleStatisticAPI } from './entity/telesale_statistic_api.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([ TelesaleStatisticAPI ]),
+    TypeOrmModule.forFeature([ Account, TelesaleStatisticAPI ]),
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.registerAsync({
       imports: [ConfigModule],
