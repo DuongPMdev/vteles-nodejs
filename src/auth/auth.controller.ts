@@ -11,7 +11,7 @@ import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
   
-  @Post('get_telesale_statistic')
+  @Get('get_telesale_statistic')
   @ApiOperation({ summary: 'Get telesales statistic' })
   @ApiResponse({ status: 200, description: 'Successful Get telesales statistic'})
   @ApiResponse({ status: 401, description: 'Unauthorized' })
