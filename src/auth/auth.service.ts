@@ -12,6 +12,10 @@ export class AuthService {
   
   async getTelesaleStatistic(room: number) {
     const telesaleStatisticAPIs = await this.telesaleStatisticAPIRepository.find({ where: { room: room } });
+    
+    for (const telesaleStatisticAPI of telesaleStatisticAPIs) {
+      telesaleStatisticAPI["display_name"] = "Pham Minh Duong";
+    }
     return telesaleStatisticAPIs;
   }
   
