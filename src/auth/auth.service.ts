@@ -15,11 +15,18 @@ export class AuthService {
   
   async getTelesaleStatistic(room: number) {
     const telesaleStatisticAPIs = await this.telesaleStatisticAPIRepository.find({ where: { room: room } });
-    
-    for (const telesaleStatisticAPI of telesaleStatisticAPIs) {
+
+    for (let i = telesaleStatisticAPIs.length - 1; i >= 0; i--) {
+      const telesaleStatisticAPI = telesaleStatisticAPIs[i];
       const account = await this.accountRepository.findOne({ where: { account_id: telesaleStatisticAPI.telesale } });
-      telesaleStatisticAPI["display_name"] = account.display_name;
+
+      if (account === null) {
+        telesaleStatisticAPIs.splice(i, 1);
+      } else {
+        telesaleStatisticAPI["display_name"] = account.display_name;
+      }
     }
+
     return telesaleStatisticAPIs;
   }
   
